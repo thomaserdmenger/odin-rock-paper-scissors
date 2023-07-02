@@ -37,14 +37,12 @@ const playRound = (playerSelection, computerSelection) => {
 
 // getting the winner of the game within 5 rounds
 const game = () => {
-  let playersChoice = 'rock'
   let playersScore = 0
-
   let computersScore = 0
 
   // get the result after 5 rounds
   for (let i = 1; i <= 5; i++) {
-    let result = playRound(playersChoice, getComputerChoice())
+    let result = playRound(prompt(), getComputerChoice())
 
     if (result.includes('win')) {
       playersScore += 1

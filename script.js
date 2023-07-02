@@ -39,6 +39,8 @@ const playRound = (playerSelection, computerSelection) => {
 const game = () => {
   let playersScore = 0
   let computersScore = 0
+  let tie = 0
+  let rounds = 0
 
   // get the result after 5 rounds
   for (let i = 1; i <= 5; i++) {
@@ -46,18 +48,23 @@ const game = () => {
 
     if (result.includes('win')) {
       playersScore += 1
+      rounds += 1
     } else if (result.includes('loose')) {
       computersScore += 1
+      rounds += 1
+    } else {
+      tie += 1
+      rounds += 1
     }
   }
 
   // find the winner
   if (playersScore > computersScore) {
-    return `🥳 You win with ${playersScore} vs. ${computersScore} points.`
+    return `🥳 You win: ${playersScore} vs. ${computersScore} points. (${tie} ties in ${rounds} rounds).`
   } else if (playersScore < computersScore) {
-    return `😢 The computer wins with ${computersScore} vs. ${playersScore} points.`
+    return `😢 The computer wins: ${computersScore} vs. ${playersScore} points. (${tie} ties in ${rounds} rounds).`
   } else {
-    return `🔁 It's a tie. Try one more game.`
+    return `🔁 It's a tie: ${playersScore} vs. ${computersScore}. (${tie} ties in ${rounds} rounds). Try one more game. `
   }
 }
 

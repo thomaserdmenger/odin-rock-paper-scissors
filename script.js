@@ -31,11 +31,36 @@ const playRound = (playerSelection, computerSelection) => {
 
   // tie between player and computerd
   else {
-    return `It's a tie: You both choose ${computersChoice} and ${playersChoice}`
+    return `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
   }
 }
 
-// Testing playRound()
-const playerSelection = 'ScissoRs'
-const computerSelection = getComputerChoice()
-console.log(playRound(playerSelection, computerSelection))
+// getting the winner of the game within 5 rounds
+const game = () => {
+  let playersChoice = 'rock'
+  let playersScore = 0
+
+  let computersScore = 0
+
+  // get the result after 5 rounds
+  for (let i = 1; i <= 5; i++) {
+    let result = playRound(playersChoice, getComputerChoice())
+
+    if (result.includes('win')) {
+      playersScore += 1
+    } else if (result.includes('loose')) {
+      computersScore += 1
+    }
+  }
+
+  // find the winner
+  if (playersScore > computersScore) {
+    return `🥳 You win with ${playersScore} vs. ${computersScore} points.`
+  } else if (playersScore < computersScore) {
+    return `😢 The computer wins with ${computersScore} vs. ${playersScore} points.`
+  } else {
+    return `🔁 It's a tie. Try one more game.`
+  }
+}
+
+console.log(game())

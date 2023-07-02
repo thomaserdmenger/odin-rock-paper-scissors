@@ -1,0 +1,31 @@
+@keyframes slideIn {
+  0% {
+    transform: translateX(-1000px);
+  }
+
+  100% {
+    transform: translatex(0);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-container {
+  animation: slideIn 2s linear;
+  overflow: hidden;
+}
+
+.style {
+  font-size: 2rem;
+}

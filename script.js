@@ -42,7 +42,7 @@ const game = () => {
 
   // get the result after 5 rounds
   for (let i = 1; i <= 5; i++) {
-    let result = playRound(prompt(), getComputerChoice())
+    let result = playRound(prompt('Choose between rock, paper or scissors'), getComputerChoice())
 
     if (result.includes('win')) {
       playersScore += 1
@@ -61,4 +61,10 @@ const game = () => {
   }
 }
 
-console.log(game())
+// Create a message in the browser
+const container = document.querySelector('.message-container')
+const message = document.createElement('span')
+message.textContent = game()
+message.classList.add('style')
+
+container.insertAdjacentElement('afterbegin', message)

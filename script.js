@@ -42,8 +42,9 @@ const game = () => {
   let tie = 0
   let rounds = 0
 
-  // get the result after 5 rounds
-  for (let i = 1; i <= 5; i++) {
+  // getting the winner with 5 points
+
+  while (playersScore < 5 && computersScore < 5) {
     let result = playRound(prompt('Choose between rock, paper or scissors'), getComputerChoice())
 
     if (result.includes('win')) {

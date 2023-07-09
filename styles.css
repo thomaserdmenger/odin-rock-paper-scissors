@@ -22,10 +22,16 @@ body {
 }
 
 .message-container {
-  animation: slideIn 2s linear;
-  overflow: hidden;
+  /* animation: slideIn 2s linear;
+  overflow: hidden; */
 }
 
 .style {
   font-size: 2rem;
+}
+
+.btn {
+  padding: 1rem 1.5rem;
+  min-height: 4rem;
+  min-width: 6rem;
 }

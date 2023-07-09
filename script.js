@@ -25,40 +25,25 @@ function playRound(e) {
   const arr = ['rock', 'paper', 'scissors']
   let message = ''
 
-  // player wins
-  if (playersChoice === arr[0] && computersChoice === arr[2]) {
+  if (
+    (playersChoice === arr[0] && computersChoice === arr[2]) ||
+    (playersChoice === arr[1] && computersChoice === arr[0]) ||
+    (playersChoice === arr[2] && computersChoice === arr[1])
+  ) {
     message = `You win: ${playersChoice} beats ${computersChoice}`
-  } else if (playersChoice === arr[1] && computersChoice === arr[0]) {
-    message = `You win: ${playersChoice} beats ${computersChoice}`
-  } else if (playersChoice === arr[2] && computersChoice === arr[1]) {
-    message = `You win: ${playersChoice} beats ${computersChoice}`
-  }
-
-  // player loses
-  if (playersChoice === arr[2] && computersChoice === arr[0]) {
+  } else if (
+    (playersChoice === arr[2] && computersChoice === arr[0]) ||
+    (playersChoice === arr[0] && computersChoice === arr[1]) ||
+    (playersChoice === arr[1] && computersChoice === arr[2])
+  ) {
     message = `You loose: ${computersChoice} beats ${playersChoice}`
-  } else if (playersChoice === arr[0] && computersChoice === arr[1]) {
-    message = `You loose: ${computersChoice} beats ${playersChoice}`
-  } else if (playersChoice === arr[1] && computersChoice === arr[2]) {
-    message = `You loose: ${computersChoice} beats ${playersChoice}`
-  }
-
-  // tie between player and computerd
-  if (playersChoice === arr[0] && computersChoice === arr[0]) {
-    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
-  } else if (playersChoice === arr[1] && computersChoice === arr[1]) {
-    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
-  } else if (playersChoice === arr[2] && computersChoice === arr[2]) {
-    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
+  } else {
+    message = `It's a tie: you both choose ${playersChoice}`
   }
 
   // render winner to screen
   resultContainer.textContent = message
 }
-
-// function handleClick(e) {
-//   console.log(e.target.id)
-// }
 
 // getting the winner of the game within 5 rounds
 // const game = () => {

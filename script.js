@@ -15,39 +15,45 @@ btnRock.addEventListener('click', playRound)
 btnPaper.addEventListener('click', playRound)
 btnScissors.addEventListener('click', playRound)
 
+// create div to render result
+const resultContainer = document.querySelector('.result-container')
+
 // getting the winner of a single round
 function playRound(e) {
   const playersChoice = e.target.id
-  console.log(playersChoice)
   const computersChoice = getComputerChoice()
   const arr = ['rock', 'paper', 'scissors']
+  let message = ''
 
   // player wins
   if (playersChoice === arr[0] && computersChoice === arr[2]) {
-    console.log(`You win: ${playersChoice} beats ${computersChoice}`)
+    message = `You win: ${playersChoice} beats ${computersChoice}`
   } else if (playersChoice === arr[1] && computersChoice === arr[0]) {
-    console.log(`You win: ${playersChoice} beats ${computersChoice}`)
+    message = `You win: ${playersChoice} beats ${computersChoice}`
   } else if (playersChoice === arr[2] && computersChoice === arr[1]) {
-    console.log(`You win: ${playersChoice} beats ${computersChoice}`)
+    message = `You win: ${playersChoice} beats ${computersChoice}`
   }
 
   // player loses
   if (playersChoice === arr[2] && computersChoice === arr[0]) {
-    console.log(`You loose: ${computersChoice} beats ${playersChoice}`)
+    message = `You loose: ${computersChoice} beats ${playersChoice}`
   } else if (playersChoice === arr[0] && computersChoice === arr[1]) {
-    console.log(`You loose: ${computersChoice} beats ${playersChoice}`)
+    message = `You loose: ${computersChoice} beats ${playersChoice}`
   } else if (playersChoice === arr[1] && computersChoice === arr[2]) {
-    console.log(`You loose: ${computersChoice} beats ${playersChoice}`)
+    message = `You loose: ${computersChoice} beats ${playersChoice}`
   }
 
   // tie between player and computerd
   if (playersChoice === arr[0] && computersChoice === arr[0]) {
-    console.log(`It's a tie: you both choose ${computersChoice} and ${playersChoice}`)
+    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
   } else if (playersChoice === arr[1] && computersChoice === arr[1]) {
-    console.log(`It's a tie: you both choose ${computersChoice} and ${playersChoice}`)
+    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
   } else if (playersChoice === arr[2] && computersChoice === arr[2]) {
-    console.log(`It's a tie: you both choose ${computersChoice} and ${playersChoice}`)
+    message = `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
   }
+
+  // render winner to screen
+  resultContainer.textContent = message
 }
 
 // function handleClick(e) {

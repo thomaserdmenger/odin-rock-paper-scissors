@@ -1,13 +1,3 @@
-@keyframes slideIn {
-  0% {
-    transform: translateX(-1000px);
-  }
-
-  100% {
-    transform: translatex(0);
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -17,13 +7,13 @@
 body {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .message-container {
-  /* animation: slideIn 2s linear;
-  overflow: hidden; */
+  margin-top: 5rem;
 }
 
 .style {

@@ -14,6 +14,9 @@ const btnScissors = document.querySelector('#scissors')
 btnRock.addEventListener('click', playRound)
 btnPaper.addEventListener('click', playRound)
 btnScissors.addEventListener('click', playRound)
+btnRock.addEventListener('click', game)
+btnPaper.addEventListener('click', game)
+btnScissors.addEventListener('click', game)
 
 // create div to render result
 const resultContainer = document.querySelector('.result-container')
@@ -41,8 +44,41 @@ function playRound(e) {
     message = `It's a tie: you both choose ${playersChoice}`
   }
 
-  // render winner to screen
   resultContainer.textContent = message
+}
+
+// get the winner with 5 points
+
+let playersScore = 0
+let computersScore = 0
+let tie = 0
+let rounds = 0
+
+function game() {
+  const message = document.querySelector('div').textContent
+
+  if (playersScore < 5 && computersScore < 5) {
+    if (message.includes('win')) {
+      playersScore += 1
+      rounds += 1
+      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
+    } else if (message.includes('loose')) {
+      computersScore += 1
+      rounds += 1
+      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
+    } else {
+      tie += 1
+      rounds += 1
+      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
+    }
+  }
+
+  if (playersScore === 5 || computersScore === 5) {
+    resultContainer.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
+    return
+  }
+
+  // Implement button to reload the game
 }
 
 // getting the winner of the game within 5 rounds

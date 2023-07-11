@@ -20,6 +20,8 @@ btnScissors.addEventListener('click', game)
 
 // create div to render result
 const resultContainer = document.querySelector('.result-container')
+const resultMessage = document.querySelector('.result-message')
+const resultStats = document.querySelector('.result-stats')
 
 // getting the winner of a single round
 function playRound(e) {
@@ -33,18 +35,20 @@ function playRound(e) {
     (playersChoice === arr[1] && computersChoice === arr[0]) ||
     (playersChoice === arr[2] && computersChoice === arr[1])
   ) {
-    message = `You win: ${playersChoice} beats ${computersChoice}`
+    message = `👍 You win: ${playersChoice} beats ${computersChoice}`
   } else if (
     (playersChoice === arr[2] && computersChoice === arr[0]) ||
     (playersChoice === arr[0] && computersChoice === arr[1]) ||
     (playersChoice === arr[1] && computersChoice === arr[2])
   ) {
-    message = `You loose: ${computersChoice} beats ${playersChoice}`
+    message = `👎 You loose: ${computersChoice} beats ${playersChoice}`
   } else {
-    message = `It's a tie: you both choose ${playersChoice}`
+    message = `✌️ It's a tie: you both choose ${playersChoice}`
   }
 
-  resultContainer.textContent = message
+  resultContainer.append(resultMessage)
+  resultMessage.textContent = message
+  resultContainer.appendChild(resultStats)
 }
 
 // get the winner with 5 points
@@ -61,20 +65,24 @@ function game() {
     if (message.includes('win')) {
       playersScore += 1
       rounds += 1
-      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
     } else if (message.includes('loose')) {
       computersScore += 1
       rounds += 1
-      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
     } else {
       tie += 1
       rounds += 1
-      resultContainer.textContent += ` p: ${playersScore}, c: ${computersScore}, t: ${tie}, r: ${rounds}`
     }
+
+    resultStats.textContent = `Your points: ${playersScore} | 🤖 points: ${computersScore} | tie: ${tie} | rounds: ${rounds}`
   }
 
   if (playersScore === 5 || computersScore === 5) {
-    resultContainer.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
+    resultStats.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
+    if (playersScore === 5) {
+      resultMessage.textContent = '🥳 You have won the game.'
+    } else {
+      resultMessage.textContent = '🤖 The Computer has won the game.'
+    }
     return
   }
 

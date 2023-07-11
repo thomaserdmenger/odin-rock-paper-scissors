@@ -82,6 +82,7 @@ function game() {
     resultStats.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
     if (playersScore === 5) {
       resultMessage.textContent = '🥳 You have won the game.'
+      resultMessage.classList.add('scale')
       btnReload.style.display = 'block'
     } else {
       resultMessage.textContent = '🤖 The Computer has won the game.'

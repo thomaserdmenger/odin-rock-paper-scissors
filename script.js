@@ -76,56 +76,21 @@ function game() {
     resultStats.textContent = `Your points: ${playersScore} | 🤖 points: ${computersScore} | tie: ${tie} | rounds: ${rounds}`
   }
 
+  const btnReload = document.querySelector('.reload')
+
   if (playersScore === 5 || computersScore === 5) {
     resultStats.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
     if (playersScore === 5) {
       resultMessage.textContent = '🥳 You have won the game.'
+      btnReload.style.display = 'block'
     } else {
       resultMessage.textContent = '🤖 The Computer has won the game.'
+      btnReload.style.display = 'block'
     }
-    return
   }
 
   // Implement button to reload the game
+  btnReload.addEventListener('click', function () {
+    location.reload()
+  })
 }
-
-// getting the winner of the game within 5 rounds
-// const game = () => {
-//   let playersScore = 0
-//   let computersScore = 0
-//   let tie = 0
-//   let rounds = 0
-
-//   // getting the winner with 5 points
-//   while (playersScore < 5 && computersScore < 5) {
-//     let result = playRound(prompt('Choose between rock, paper or scissors'), getComputerChoice())
-
-//     if (result.includes('win')) {
-//       playersScore += 1
-//       rounds += 1
-//     } else if (result.includes('loose')) {
-//       computersScore += 1
-//       rounds += 1
-//     } else {
-//       tie += 1
-//       rounds += 1
-//     }
-//   }
-
-//   // find the winner
-//   if (playersScore > computersScore) {
-//     return `🥳 You win: ${playersScore} vs. ${computersScore} points. (${tie} ties in ${rounds} rounds).`
-//   } else if (playersScore < computersScore) {
-//     return `😢 The computer wins: ${computersScore} vs. ${playersScore} points. (${tie} ties in ${rounds} rounds).`
-//   } else {
-//     return `🔁 It's a tie: ${playersScore} vs. ${computersScore}. (${tie} ties in ${rounds} rounds). Try one more game. `
-//   }
-// }
-
-// Create a message in the browser
-// const container = document.querySelector('.message-container')
-// const message = document.createElement('span')
-// message.textContent = game()
-// message.classList.add('style')
-
-// container.insertAdjacentElement('afterbegin', message)

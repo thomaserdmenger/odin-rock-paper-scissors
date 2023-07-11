@@ -79,7 +79,7 @@ function game() {
   const btnReload = document.querySelector('.reload')
 
   if (playersScore === 5 || computersScore === 5) {
-    resultStats.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
+    resultStats.textContent = `Your points: ${playersScore} | 🤖 points: ${computersScore} | tie: ${tie} | rounds: ${rounds}`
     if (playersScore === 5) {
       resultMessage.textContent = '🥳 You have won the game.'
       resultMessage.classList.add('scale')

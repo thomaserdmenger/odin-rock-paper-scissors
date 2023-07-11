@@ -5,74 +5,93 @@ const getComputerChoice = () => {
   return arr[randomNum]
 }
 
+// getting players choices (buttons)
+const btnRock = document.querySelector('#rock')
+const btnPaper = document.querySelector('#paper')
+const btnScissors = document.querySelector('#scissors')
+
+// listen for click events on buttons and call playround
+btnRock.addEventListener('click', playRound)
+btnPaper.addEventListener('click', playRound)
+btnScissors.addEventListener('click', playRound)
+btnRock.addEventListener('click', game)
+btnPaper.addEventListener('click', game)
+btnScissors.addEventListener('click', game)
+
+// create div to render result
+const resultContainer = document.querySelector('.result-container')
+const resultMessage = document.querySelector('.result-message')
+const resultStats = document.querySelector('.result-stats')
+
 // getting the winner of a single round
-const playRound = (playerSelection, computerSelection) => {
-  const playersChoice = playerSelection.toLowerCase()
-  const computersChoice = computerSelection.toLowerCase()
+function playRound(e) {
+  const playersChoice = e.target.id
+  const computersChoice = getComputerChoice()
   const arr = ['rock', 'paper', 'scissors']
+  let message = ''
 
-  // player wins
-  if (playersChoice === arr[0] && computersChoice === arr[2]) {
-    return `You win: ${playersChoice} beats ${computersChoice}`
-  } else if (playersChoice === arr[1] && computersChoice === arr[0]) {
-    return `You win: ${playersChoice} beats ${computersChoice}`
-  } else if (playersChoice === arr[2] && computersChoice === arr[1]) {
-    return `You win: ${playersChoice} beats ${computersChoice}`
+  if (
+    (playersChoice === arr[0] && computersChoice === arr[2]) ||
+    (playersChoice === arr[1] && computersChoice === arr[0]) ||
+    (playersChoice === arr[2] && computersChoice === arr[1])
+  ) {
+    message = `👍 You win: ${playersChoice} beats ${computersChoice}`
+  } else if (
+    (playersChoice === arr[2] && computersChoice === arr[0]) ||
+    (playersChoice === arr[0] && computersChoice === arr[1]) ||
+    (playersChoice === arr[1] && computersChoice === arr[2])
+  ) {
+    message = `👎 You loose: ${computersChoice} beats ${playersChoice}`
+  } else {
+    message = `✌️ It's a tie: you both choose ${playersChoice}`
   }
 
-  // player loses
-  if (playersChoice === arr[2] && computersChoice === arr[0]) {
-    return `You loose: ${computersChoice} beats ${playersChoice}`
-  } else if (playersChoice === arr[0] && computersChoice === arr[1]) {
-    return `You loose: ${computersChoice} beats ${playersChoice}`
-  } else if (playersChoice === arr[1] && computersChoice === arr[2]) {
-    return `You loose: ${computersChoice} beats ${playersChoice}`
-  }
-
-  // tie between player and computerd
-  else {
-    return `It's a tie: you both choose ${computersChoice} and ${playersChoice}`
-  }
+  resultContainer.append(resultMessage)
+  resultMessage.textContent = message
+  resultContainer.appendChild(resultStats)
 }
 
-// getting the winner of the game within 5 rounds
-const game = () => {
-  let playersScore = 0
-  let computersScore = 0
-  let tie = 0
-  let rounds = 0
+// get the winner with 5 points
 
-  // getting the winner with 5 points
+let playersScore = 0
+let computersScore = 0
+let tie = 0
+let rounds = 0
 
-  while (playersScore < 5 && computersScore < 5) {
-    let result = playRound(prompt('Choose between rock, paper or scissors'), getComputerChoice())
+function game() {
+  const message = document.querySelector('div').textContent
 
-    if (result.includes('win')) {
+  if (playersScore < 5 && computersScore < 5) {
+    if (message.includes('win')) {
       playersScore += 1
       rounds += 1
-    } else if (result.includes('loose')) {
+    } else if (message.includes('loose')) {
       computersScore += 1
       rounds += 1
     } else {
       tie += 1
       rounds += 1
     }
+
+    resultStats.textContent = `Your points: ${playersScore} | 🤖 points: ${computersScore} | tie: ${tie} | rounds: ${rounds}`
   }
 
-  // find the winner
-  if (playersScore > computersScore) {
-    return `🥳 You win: ${playersScore} vs. ${computersScore} points. (${tie} ties in ${rounds} rounds).`
-  } else if (playersScore < computersScore) {
-    return `😢 The computer wins: ${computersScore} vs. ${playersScore} points. (${tie} ties in ${rounds} rounds).`
-  } else {
-    return `🔁 It's a tie: ${playersScore} vs. ${computersScore}. (${tie} ties in ${rounds} rounds). Try one more game. `
+  const btnReload = document.querySelector('.reload')
+
+  if (playersScore === 5 || computersScore === 5) {
+    resultStats.textContent = `player: ${playersScore}, computer: ${computersScore}, tie: ${tie}, rounds: ${rounds}`
+    if (playersScore === 5) {
+      resultMessage.textContent = '🥳 You have won the game.'
+      resultMessage.classList.add('scale')
+      btnReload.style.display = 'block'
+    } else {
+      resultMessage.textContent = '🤖 The Computer has won the game.'
+      btnReload.style.display = 'block'
+    }
   }
+
+  // Implement button to reload the game
+  btnReload.addEventListener('click', function () {
+    location.reload()
+  })
 }
-
-// Create a message in the browser
-const container = document.querySelector('.message-container')
-const message = document.createElement('span')
-message.textContent = game()
-message.classList.add('style')
-
-container.insertAdjacentElement('afterbegin', message)
